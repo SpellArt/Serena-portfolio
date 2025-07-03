@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贾苏睿娜 - 作品集展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 5px 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            color: #8a4baf;
+            font-weight: bold;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: #8a4baf;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: none; /* 在移动端隐藏 */
+        }
+        
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+                list-style: none;
+            }
+            
+            .nav-links li {
+                margin-left: 40px;
+            }
+            
+            .nav-links a {
+                text-decoration: none;
+                color: #333;
+                font-size: 16px;
+                padding: 5px 0;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links a.active {
+                color: #8a4baf;
+                font-weight: 600;
+            }
+
+            .nav-links a:hover {
+                color: #8a4baf;
+            }
+        }
+        
+        /* 移动端菜单按钮 */
+        .menu-button {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        @media (min-width: 768px) {
+            .menu-button {
+                display: none;
+            }
+        }
+        
+        /* 移动端菜单 */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: white;
+        }
+        
+        .mobile-menu.active {
+            max-height: 300px;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            border-top: 1px solid #eee;
+        }
+        
+        .mobile-menu a:hover {
+            color: #8a4baf;
+            background-color: #f9f9f9;
+        }
+        
+        /* 分类按钮样式 */
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-button {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            background-color: white;
+            color: #666;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-button.active {
+            background-color: #8a4baf;
+            color: white;
+            border-color: #8a4baf;
+        }
+        
+        /* 作品集区域样式 */
+        .portfolio-section {
+            margin-bottom: 50px;
+            padding: 20px 0;
+            display: none; /* 默认隐藏所有布局 */
+        }
+        
+        .portfolio-section.active {
+            display: block; /* 显示激活的布局 */
+        }
+        
+        /* 布局1 - 类似Pinterest布局 */
+        .layout-1 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        /* 设置小图片为竖向显示 */
+        .layout-1 .item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 小图片 - 竖向显示 */
+        .layout-1 .item:nth-child(1),
+        .layout-1 .item:nth-child(2),
+        .layout-1 .item:nth-child(3),
+        .layout-1 .item:nth-child(4),
+        .layout-1 .item:nth-child(7),
+        .layout-1 .item:nth-child(8),
+        .layout-1 .item:nth-child(9),
+        .layout-1 .item:nth-child(10),
+        .layout-1 .item:nth-child(13),
+        .layout-1 .item:nth-child(14),
+        .layout-1 .item:nth-child(15),
+        .layout-1 .item:nth-child(16),
+        .layout-1 .item:nth-child(17),
+        .layout-1 .item:nth-child(18),
+        .layout-1 .item:nth-child(19),
+        .layout-1 .item:nth-child(20),
+        .layout-1 .item:nth-child(21),
+        .layout-1 .item:nth-child(22),
+        .layout-1 .item:nth-child(25),
+        .layout-1 .item:nth-child(26),
+        .layout-1 .item:nth-child(27),
+        .layout-1 .item:nth-child(28),
+        .layout-1 .item:nth-child(31),
+        .layout-1 .item:nth-child(32) {
+            grid-column: span 1;
+        }
+        
+        .layout-1 .item:nth-child(1)::before,
+        .layout-1 .item:nth-child(2)::before,
+        .layout-1 .item:nth-child(3)::before,
+        .layout-1 .item:nth-child(4)::before,
+        .layout-1 .item:nth-child(7)::before,
+        .layout-1 .item:nth-child(8)::before,
+        .layout-1 .item:nth-child(9)::before,
+        .layout-1 .item:nth-child(10)::before,
+        .layout-1 .item:nth-child(13)::before,
+        .layout-1 .item:nth-child(14)::before,
+        .layout-1 .item:nth-child(15)::before,
+        .layout-1 .item:nth-child(16)::before,
+        .layout-1 .item:nth-child(17)::before,
+        .layout-1 .item:nth-child(18)::before,
+        .layout-1 .item:nth-child(19)::before,
+        .layout-1 .item:nth-child(20)::before,
+        .layout-1 .item:nth-child(21)::before,
+        .layout-1 .item:nth-child(22)::before,
+        .layout-1 .item:nth-child(25)::before,
+        .layout-1 .item:nth-child(26)::before,
+        .layout-1 .item:nth-child(27)::before,
+        .layout-1 .item:nth-child(28)::before,
+        .layout-1 .item:nth-child(31)::before,
+        .layout-1 .item:nth-child(32)::before {
+            content: "";
+            display: block;
+            padding-top: 133.2%; /* 1785/1340 = 1.332 = 133.2% */
+        }
+        
+        /* 大图片 - 横向显示 */
+        .layout-1 .item:nth-child(5),
+        .layout-1 .item:nth-child(6),
+        .layout-1 .item:nth-child(11),
+        .layout-1 .item:nth-child(12),
+        .layout-1 .item:nth-child(23),
+        .layout-1 .item:nth-child(24),
+        .layout-1 .item:nth-child(29),
+        .layout-1 .item:nth-child(30) {
+            grid-column: span 2;
+        }
+        
+        .layout-1 .item:nth-child(5)::before,
+        .layout-1 .item:nth-child(6)::before,
+        .layout-1 .item:nth-child(11)::before,
+        .layout-1 .item:nth-child(12)::before,
+        .layout-1 .item:nth-child(23)::before,
+        .layout-1 .item:nth-child(24)::before,
+        .layout-1 .item:nth-child(29)::before,
+        .layout-1 .item:nth-child(30)::before {
+            content: "";
+            display: block;
+            padding-top: 66.6%; /* 与竖图高度保持一致 */
+        }
+        
+        /* 所有图片的通用样式 */
+        .layout-1 .item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* 布局2 - 均等网格 */
+        .layout-2 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .layout-2 .item {
+            aspect-ratio: 1/1.3;
+        }
+        
+        /* 布局3 - 均等网格 */
+        .layout-3 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .layout-3 .item {
+            aspect-ratio: 1/1.3;
+        }
+        
+        /* 布局4 - 大横幅+网格布局 */
+        .layout-4 {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .layout-4 .banner-item {
+            width: 100%;
+            height: 200px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .layout-4 .grid-items {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .layout-4 .grid-items .item {
+            aspect-ratio: 1/1.3;
+        }
+        
+        /* 通用项目样式 */
+        .item {
+            background-color: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">贾苏睿娜作品集</div>
+                <ul class="nav-links">
+                    <li><a href="Serena.html#about">关于我</a></li>
+                    <li><a href="Serena.html#skills">专业技能</a></li>
+                    <li><a href="Serena.html#experience">工作经历</a></li>
+                    <li><a href="#" class="active">作品集</a></li>
+                    <li><a href="Serena.html#contact">联系方式</a></li>
+                    <li><a href="Serena.html">返回简历</a></li>
+                </ul>
+                <button class="menu-button" id="menuButton">☰</button>
+            </nav>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="Serena.html#about">关于我</a>
+            <a href="Serena.html#skills">专业技能</a>
+            <a href="Serena.html#experience">工作经历</a>
+            <a href="#" class="active">作品集</a>
+            <a href="Serena.html#contact">联系方式</a>
+            <a href="Serena.html">返回简历</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 筛选按钮 -->
+        <div class="filter-buttons">
+            <button class="filter-button" data-layout="layout-1">A级_AI虚拟拍摄</button>
+            <button class="filter-button" data-layout="layout-2">BC级_AI换景</button>
+            <button class="filter-button" data-layout="layout-3">3D_AI虚拟模特</button>
+            <button class="filter-button" data-layout="layout-4">AI高清洗图与局部重绘</button>
+        </div>
+
+        <!-- 布局1 - 类似Pinterest布局 -->
+        <section id="layout-1" class="portfolio-section">
+            <div class="layout-1">
+                <div class="item"><img src="https://github.com/user-attachments/assets/49b72574-ed10-4c55-9e3e-fcf577edc2e1" alt="创意设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/ccb0ad8a-5e4d-4909-a1f6-5cc10919068b" alt="品牌设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/19a39f85-245d-4bf8-a7c7-e5b5d84471cb" alt="海报设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/4395934f-7731-49a3-a6dd-9434c4c7e187" alt="UI设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/1e5c2332-6cd6-4428-a848-b9f3c4868234" alt="网页设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/0668c383-a1d9-4999-9d89-298bf9aa66a1" alt="移动端设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/cda6855a-7265-4d78-a23a-dbaa9565fc56" alt="图标"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/5551fd6d-794e-4f17-997e-89288a864435" alt="产品"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/42ca2dc4-dd88-476c-8297-0052d7975d4f" alt="网站"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/fd4e5414-8100-43d7-8c57-cd2b8fa737c9" alt="名片"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/20f0089e-9eb9-453d-b799-50fb2bf25b76" alt="插画"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/a8e6fbdf-60d5-4ac4-8a54-b78c412d9630" alt="印刷"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/422457aa-ecf7-4a36-8cc2-6c93da809102" alt="字体"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/76eaf2f0-2418-430f-ba53-3218494c9d07" alt="画册"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/e5d7ba6f-c5d3-4bb6-b126-351145b1dbce" alt="标志设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/de7d17dc-f307-41ef-ac12-cd6037eb2230" alt="包装设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/6f9c1b27-6e13-46ff-8253-480066e2f8c7" alt="插画设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/fda6cde7-d617-49c7-8e4f-db0ac191a792" alt="印刷设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/cc756196-9b66-4824-9f4c-b39ed47ca2bd" alt="产品设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/2d98b418-ac81-4147-b8b0-b535f2978826" alt="网站设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/4be53879-a86d-4e24-882b-9f310fa4a534" alt="名片设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/e16c9664-365d-433d-8ad4-f2a3aa34eb6f" alt="图标设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/087f3196-bdc3-4a3a-9047-2e4c1deeaf73" alt="字体设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/47a6ecdc-b39c-456a-9098-6b51cdc26a80" alt="画册设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/798dc29f-6522-4fec-a884-964e0e6c94a8" alt="创意设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/380cc5a6-d48a-496c-9c5d-262afa9fbe5a" alt="品牌设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/e03c9e92-c7ca-4023-b87d-f586171dbf03" alt="海报设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/a1b27db2-011b-4fec-a98a-2b76e16cf544" alt="UI设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/cd937244-0cf2-414b-9993-8f449dfadca4" alt="网页设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/339a942e-6f62-494f-95b1-e87a9c4a13db" alt="移动端设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/0aa18a52-a897-42db-b910-f6dded664e47" alt="标志设计"></div>
+                <div class="item"><img src="https://github.com/user-attachments/assets/0c523d0f-ac9b-478d-b9ff-4c1da39c21bc" alt="包装设计"></div>
+            </div>
+        </section>
+
+        <!-- 布局2 - 均等网格 -->
+        <section id="layout-2" class="portfolio-section">
+            <div class="layout-2">
+                <div class="item"><img src="image\BC\black (1).png" alt="标志设计1"></div>
+                <div class="item"><img src="image\BC\black (2).png" alt="标志设计2"></div>
+                <div class="item"><img src="image\BC\black (3).png" alt="标志设计3"></div>
+                <div class="item"><img src="image\BC\black (4).png" alt="标志设计4"></div>
+                <div class="item"><img src="image\BC\AI black (1).png" alt="标志设计5"></div>
+                <div class="item"><img src="image\BC\AI black (2).png" alt="标志设计6"></div>
+                <div class="item"><img src="image\BC\AI black (3).png" alt="标志设计7"></div>
+                <div class="item"><img src="image\BC\AI black (4).png" alt="标志设计8"></div>
+                <div class="item"><img src="image\BC\baby2 (2).jpeg" alt="标志设计9"></div>
+                <div class="item"><img src="image\BC\baby2 (5).jpeg" alt="标志设计10"></div>
+                <div class="item"><img src="image\BC\baby2 (4).jpeg" alt="标志设计11"></div>
+                <div class="item"><img src="image\BC\baby2 (3).jpeg" alt="标志设计12"></div>
+                <div class="item"><img src="image\BC\K1120125022401637_3.jpg" alt="标志设计13"></div>
+                <div class="item"><img src="image\BC\K1120125022401637_4.jpg" alt="标志设计14"></div>
+                <div class="item"><img src="image\BC\K1120125030303759_首图.jpg" alt="标志设计15"></div>
+                <div class="item"><img src="image\BC\K1120125030303759_首图 (2).jpg" alt="标志设计16"></div>
+                <div class="item"><img src="image\BC\W1220124122602805_1_1.JPG" alt="标志设计17"></div>
+                <div class="item"><img src="image\BC\W1220124122602805_1-001.png" alt="标志设计18"></div>
+                <div class="item"><img src="image\BC\W1220125010903285_2_1.JPG" alt="标志设计20"></div>
+                <div class="item"><img src="image\BC\W1220125010903285_2_0001.png" alt="标志设计19"></div>
+                <div class="item"><img src="image\BC\32121125021001810_首图 (2).jpg"" alt="标志设计23"></div>
+                <div class="item"><img src="image\BC\32121125021001810_首图.jpg"" alt="标志设计24"></div>
+                <div class="item"><img src="image\BC\32121125022601820_首图 (2).jpg"" alt="标志设计25"></div>
+                <div class="item"><img src="image\BC\32121125022601820_首图.jpg"" alt="标志设计26"></div>
+              <div class="item"><img src="image\BC\BC-sonw\1 (2).png""></div>
+                <div class="item"><img src="image\BC\BC-sonw\1 (1).png"" alt="标志设计32"></div>
+                <div class="item"><img src="image\BC\W3160125010900612_首图 (2).jpg" alt="标志设计21"></div>
+                <div class="item"><img src="image\BC\W3160125010900612_首图.jpg" alt="标志设计22"></div>
+                <div class="item"><img src="image\BC\football\00025-2950547836.png" alt="标志设计27"></div>
+                <div class="item"><img src="image\BC\football\1443112408091232_1.jpg" alt="标志设计28"></div>
+                <div class="item"><img src="image\BC\football\00027-3798355211.png" alt="标志设计29"></div>
+                <div class="item"><img src="image\BC\football\1443112408091232_2.jpg"" alt="标志设计30"></div>
+                <div class="item"><img src="image\baby\ComfyUI_temp_kvmgp_00001_.png" alt="标志设计27"></div>
+                <div class="item"><img src="image\baby\1.png" alt="标志设计28"></div>
+                <div class="item"><img src="image\baby\2.png" alt="标志设计29"></div>
+                <div class="item"><img src="image\baby\6.png" alt="标志设计30"></div>
+                <div class="item"><img src="image\baby\4.png" alt="标志设计28"></div>
+                <div class="item"><img src="image\baby\5.png" alt="标志设计29"></div>
+                <div class="item"><img src="image\baby\3.png" alt="标志设计30"></div>
+                <div class="item"><img src="image\baby\7.png" alt="标志设计30"></div>
+            </div>
+        </section>
+
+        <!-- 布局3 - 均等网格 -->
+        <section id="layout-3" class="portfolio-section">
+            <div class="layout-3">
+                <div class="item"><img src="image\Matt\定裸模\穿衣模特\pose8.png" alt="UI设计17"></div>
+                <div class="item"><img src="image\Matt\定裸模\pose08.jpg" alt="UI设计18"></div>
+                <div class="item"><img src="image\Matt\定裸模\pose09.jpg" alt="UI设计19"></div>
+                <div class="item"><img src="image\Matt\定裸模\穿衣模特\9.png" alt="UI设计20"></div>
+                <div class="item"><img src="image\Matt\定裸模\pose13.jpg" alt="UI设计21"></div>
+                <div class="item"><img src="image\Matt\定裸模\穿衣模特\13.png" alt="UI设计22"></div>
+                <div class="item"><img src="image\Matt\定裸模\穿衣模特\10.png" alt="UI设计23"></div>
+                <div class="item"><img src="image\Matt\定裸模\穿衣模特\8-1.png" alt="UI设计24"></div>
+                <div class="item"><img src="image\Nat\穿衣\mote.png" alt="UI设计1"></div>
+                <div class="item"><img src="image\Nat\穿衣\1.png" alt="UI设计2"></div>
+                <div class="item"><img src="image\Nat\穿衣\2.png" alt="UI设计3"></div>
+                <div class="item"><img src="image\Nat\穿衣\3.png" alt="UI设计4"></div>
+                <div class="item"><img src="image\Nat\穿衣\4.png" alt="UI设计5"></div>
+                <div class="item"><img src="image\Nat\穿衣\5.png" alt="UI设计6"></div>
+                <div class="item"><img src="image\Nat\穿衣\6.png" alt="UI设计7"></div>
+                <div class="item"><img src="image\Nat\穿衣\7.png" alt="UI设计8"></div>
+                <div class="item"><img src="image\Nat\穿衣\12.png" alt="UI设计13"></div>
+                <div class="item"><img src="image\Nat\穿衣\13.png" alt="UI设计14"></div>
+                <div class="item"><img src="image\Nat\穿衣\14.png" alt="UI设计15"></div>
+                <div class="item"><img src="image\Nat\穿衣\15.png" alt="UI设计16"></div>
+                <div class="item"><img src="image\icon_甜美形象\1.jpg" alt="UI设计25"></div>
+                <div class="item"><img src="image\icon_甜美形象\2.jpg" alt="UI设计26"></div>
+                <div class="item"><img src="image\icon_办公室形象\1.png" alt="UI设计11"></div>
+                <div class="item"><img src="image\icon_办公室形象\2.png" alt="UI设计12"></div>
+                <div class="item"><img src="image\Lily\2.jpg" alt="UI设计27"></div>
+                <div class="item"><img src="image\Lily\3.jpg" alt="UI设计28"></div>
+                <div class="item"><img src="image\Lily\1.jpg" alt="UI设计29"></div>
+                <div class="item"><img src="image\大码男装\1.png" alt="UI设计32"></div>
+                <div class="item"><img src="image\icon_Luna\1.jpg" alt="UI设计9"></div>
+                <div class="item"><img src="image\icon_Luna\2.png" alt="UI设计10"></div>
+                <div class="item"><img src="image\ICON_Zoe\image.jpg" alt="UI设计30"></div>
+                <div class="item"><img src="image\ICON_Zoe\1.jpg" alt="UI设计31"></div>
+            </div>
+        </section>
+
+        <!-- 布局4 - 大横幅+网格布局 -->
+        <section id="layout-4" class="portfolio-section">
+            <div class="layout-4">
+                <div class="grid-items">
+                    <div class="item"><img src="image\洗图\1 (2).png" alt="模特库设计1"></div>
+                    <div class="item"><img src="image\洗图\1 (1).png" alt="模特库设计2"></div>
+                    <div class="item"><img src="image\洗图\4 (2).png" alt="模特库设计3"></div>
+                    <div class="item"><img src="image\洗图\4 (1).png" alt="工作流设计2"></div>
+                    <div class="item"><img src="image\洗图\3 (2).png" alt="模特库设计1"></div>
+                    <div class="item"><img src="image\洗图\3 (1).png" alt="模特库设计2"></div>
+                    <div class="item"><img src="image\洗图\5 (1).png" alt="模特库设计3"></div>
+                    <div class="item"><img src="image\洗图\5 (2).png" alt="工作流设计2"></div>
+                    <div class="item"><img src="image\洗图\5 (3).png" alt="模特库设计1"></div>
+                    <div class="item"><img src="image\洗图\5 (4).png" alt="模特库设计2"></div>
+                    <div class="item"><img src="image\洗图\2 (2).png" alt="模特库设计3"></div>
+                    <div class="item"><img src="image\洗图\2 (1).png" alt="工作流设计2"></div>
+                    <div class="item"><img src="image\洗图\7 (1).png" alt="模特库设计1"></div>
+                    <div class="item"><img src="image\洗图\7 (2).png" alt="模特库设计2"></div>
+                    <div class="item"><img src="image\洗图\8 (2).png" alt="模特库设计3"></div>
+                    <div class="item"><img src="image\洗图\8 (1).png" alt="工作流设计2"></div>
+                    <div class="item"><img src="image\洗图\9 (2).png" alt="模特库设计1"></div>
+                    <div class="item"><img src="image\洗图\9 (1).png" alt="模特库设计2"></div>
+                    <div class="item"><img src="image\洗图\6 (1).png" alt="模特库设计3"></div>
+                    <div class="item"><img src="image\洗图\6 (2).png" alt="工作流设计2"></div>
+                    <div class="item"><img src="image\洗图\10 (2).png" alt="模特库设计1"></div>
+                    <div class="item"><img src="image\洗图\10 (1).png" alt="模特库设计2"></div>
+                    <div class="item"><img src="image\洗图\11 (1).png" alt="模特库设计3"></div>
+                    <div class="item"><img src="image\洗图\11 (2).png" alt="工作流设计2"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 页面加载后默认显示第一个布局
+        document.addEventListener('DOMContentLoaded', function() {
+            // 默认激活第一个按钮和布局
+            const firstButton = document.querySelector('.filter-button');
+            const firstLayout = document.getElementById('layout-1');
+            
+            if (firstButton && firstLayout) {
+                firstButton.classList.add('active');
+                firstLayout.classList.add('active');
+            }
+            
+            // 为所有筛选按钮添加点击事件
+            const filterButtons = document.querySelectorAll('.filter-button');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 移除所有按钮的激活状态
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // 添加当前按钮的激活状态
+                    this.classList.add('active');
+                    
+                    // 获取要显示的布局ID
+                    const layoutId = this.getAttribute('data-layout');
+                    
+                    // 隐藏所有布局
+                    const portfolioSections = document.querySelectorAll('.portfolio-section');
+                    portfolioSections.forEach(section => section.classList.remove('active'));
+                    
+                    // 显示选中的布局
+                    const selectedLayout = document.getElementById(layoutId);
+                    if (selectedLayout) {
+                        selectedLayout.classList.add('active');
+                    }
+                });
+            });
+            
+            // 移动端菜单切换
+            const menuButton = document.getElementById('menuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
